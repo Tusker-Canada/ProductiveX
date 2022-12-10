@@ -74,8 +74,6 @@ def finished():
 def calender():
 
 
-  return render_template('calendar.html')
-
 
 
 

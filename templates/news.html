@@ -2,30 +2,175 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Website</title>
+    <title>News</title>
 </head>
 <body>
-    <h1>Hello!</h1>
+
+    <nav class = "navbar">
+        <div class = "container">
+            <div class = "logo"> Productive X</div>
+            <ul class = "nav">
+                <li><a class = "nav-item" href="/home">HOME</a></li>
+                <li><a class = "nav-item-active" href="/news">NEWS</a></li>
+                <li><a class = "nav-item" href="/todo">TODO</a></li>
+                <li><a class = "nav-item" href="/calendar">CALENDAR</a></li>
+                <li><a class = "nav-item" href="/courses">COURSES</a></li>
+            </ul>
+        </div>
+
+    </nav>
+
+
 </body>
 
 <main>
-    <h1> Here are the daily headlines!</h1>
-   
+
     
+    {% for article in articles %}
+    <div class = "card">
+        <div class="card-body">
+            <img class = "card-img" src="{{article['urlToImage']}}" alt="img">
+            <h2 class = "card-title"> <a class = "card-title-link" target = "_blank" href="{{article['url']}}"> {{article["title"]}} </a></h2>
+            <p class = "card-description"> {{article["description"]}} </p>
 
-
-    <div>
-        {% for article in articles %}
-        <p>{{article["title"]}}</p>
-        <p>{{article["author"]}}</p>
-        <p>{{article["description"]}}</p>
-        <a href="{{article['url']}}"> {{article["url"]}} </a>
-        <img src="{{article['ulrToImage']}}" alt="IMG_DESCRIPTION">
-    
-        {% endfor %}
-
+        </div>
+        
     </div>
+    {% endfor %}
+
+
+
+</div>
+</section>
 </main>
 
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+ul {
+    list-style-type: none;
+}
+
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+.navbar {
+    height: 60px;
+    background: #FAF9F6;
+}
+
+.navbar .logo {
+    color: orange;
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.nav-item {
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.nav-item-active {
+    text-decoration: none;
+    color: orange;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.navbar a:hover {
+    color: orange;
+}
+
+.navbar .container {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.navbar ul {
+    display: flex;
+}
+
+.navbar ul li {
+    margin-left: 20px;
+}
+
+html {
+    background-color: #D3D3D3;
+}
+
+
+
+main {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    display: grid;
+    margin: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 0.3fr));
+    grid-gap: 2rem;
+    justify-content: center;
+    background-color:#D3D3D3 ;
+}
+
+.card {
+    overflow: hidden;
+    background-color: #FAF9F6;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-img {
+    height: 12rem;
+    width: 100%;
+    object-fit: cover;
+
+}
+
+.card-title {
+    padding: 1rem;
+}
+
+.card-description {
+    padding: 0 1rem;
+}
+
+.card-title-link {
+    text-decoration: none;
+    color: orange;
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</style>
 
 </html>
