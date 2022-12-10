@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Website</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>here is yo todo list!</h1>
+</body>
+
+<main>
+    <form action="http://localhost:3000/todo", method = "POST">
+        <p><input type="text" name="Name"/></p>
+        <p><input type="submit" value ="submit"/></p>
+    </form>
+ 
+    {% if items is none %}
+    <form action="http://localhost:3000/todo", method = "POST">
+        <p><input type="text" name="Name"/></p>
+        <p><input type="submit" value ="submit"/></p>
+    </form>
+    {% endif %}
+    
+    {% for item in items %}
+    <p> {{item}} </p> 
+    <form action="http://localhost:3000/finished", method = "POST">
+        <p><input type="checkbox" value = "{{item}}" name="Name" onChange="this.form.submit()"/></p>
+        
+    </form>
+    <form action="http://localhost:3000/delete", method = "POST">
+        <p><input type="hidden" value = "{{item}}" name="Name"/></p>
+        <button value = "" type = "submit"></button>
+    </form>
+    {% endfor %}
+    
+</main>
+
+
+</html>

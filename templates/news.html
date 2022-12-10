@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Website</title>
+</head>
+<body>
+    <h1>Hello!</h1>
+</body>
+
+<main>
+    <h1> Here are the daily headlines!</h1>
+   
+    
+
+
+    <div>
+        {% for article in articles %}
+        <p>{{article["title"]}}</p>
+        <p>{{article["author"]}}</p>
+        <p>{{article["description"]}}</p>
+        <a href="{{article['url']}}"> {{article["url"]}} </a>
+        <img src="{{article['ulrToImage']}}" alt="IMG_DESCRIPTION">
+    
+        {% endfor %}
+
+    </div>
+</main>
+
+
+</html>
