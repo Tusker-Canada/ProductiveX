@@ -71,10 +71,13 @@ def finished():
     return redirect('/todo')
 
 
-@app.route('/calandar')
-def calandar():
-  return render_template('calandar.html')
+@app.route('/calendar')
+def calendar():
+  return render_template('calendar.html')
 
+@app.route('/courses')
+def courses():
+  return render_template('courses.html')
 
 
 

@@ -2,20 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Website</title>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <title>Todo</title>
 </head>
 
-{% if counter_val is none%}
-<body>
-    <h1>Welcome! You have completed no tasks today!</h1>
-</body>
 
-{% else %}
 <body>
+    <nav class = "navbar">
+        <div class = "container">
+            <div class = "logo"> Productive X</div>
+            <ul class = "nav">
+                <li><a class = "nav-item" href="/home">HOME</a></li>
+                <li><a class = "nav-item" href="/news">NEWS</a></li>
+                <li><a class = "nav-item-active" href="/todo">TODO</a></li>
+                <li><a class = "nav-item" href="/calendar">CALENDAR</a></li>
+                <li><a class = "nav-item" href="/courses">COURSES</a></li>
+            </ul>
+        </div>
+
+    </nav>
+
     <h1>Welcome! You have completed {{counter_val}} tasks today!</h1>
 </body>
-{% endif %}
+
 
 <main>
     <form action="http://localhost:3000/todo", method = "POST">
@@ -44,5 +52,80 @@
     
 </main>
 
+<style>
 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+ul {
+    list-style-type: none;
+}
+
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+.navbar {
+    height: 60px;
+    background: #FAF9F6;
+}
+
+.navbar .logo {
+    color: orange;
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.nav-item {
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.nav-item-active {
+    text-decoration: none;
+    color: orange;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.navbar a:hover {
+    color: orange;
+}
+
+.navbar .container {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.navbar ul {
+    display: flex;
+}
+
+.navbar ul li {
+    margin-left: 20px;
+}
+
+html {
+    background-color: #D3D3D3;
+}
+
+
+
+</style>
 </html>
