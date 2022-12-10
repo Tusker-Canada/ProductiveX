@@ -70,9 +70,13 @@ def finished():
     return redirect('/todo')
 
 
-@app.route('/calender')
+@app.route('/calendar')
 def calender():
+  return render_template("calendar.html")
 
+@app.route('/courses')
+def calender():
+  return render_template("courses.html")
 
 
 
