@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Todo</title>
+    <link rel="icon" href="https://i.ibb.co/xDwJgJX/P.png">
 </head>
 
 
@@ -21,36 +22,37 @@
 
     </nav>
 
-    <h1>Welcome! You have completed {{counter_val}} tasks today!</h1>
+    
 </body>
 
 
-<main>
-    <form action="http://localhost:3000/todo", method = "POST">
-        <p><input type="text" name="Name"/></p>
-        <p><input type="submit" value ="submit"/></p>
-    </form>
- 
-    {% if items is none %}
-    <form action="http://localhost:3000/todo", method = "POST">
-        <p><input type="text" name="Name"/></p>
-        <p><input type="submit" value ="submit"/></p>
-    </form>
-    {% endif %}
+<header>
     
+
+    <div class = "item-creator" >
+    <h1 class = "counter" >Welcome! You have completed {{counter_val}} tasks today!</h1>
+    <form action="http://localhost:3000/todo", method = "POST">
+        <p><input class = "input-text" placeholder="Type your task..." type="text" name="Name"/></p>
+        <p><input class = "btn" type="submit" value ="submit"/></p>
+    </form>
+</div>
+
+
     {% for item in items %}
-    <p> {{item}} </p> 
+    <div class = "item-actions">
+    <p class = "task-item"> Task: {{item}} </p> 
     <form action="http://localhost:3000/finished", method = "POST">
-        <p><input type="checkbox" value = "{{item}}" name="Name" onChange="this.form.submit()"/></p>
+        <p><input   type="checkbox" value = "{{item}}" name="Name" onChange="this.form.submit()"/> Finish Task</p>
         
     </form>
     <form action="http://localhost:3000/delete", method = "POST">
         <p><input type="hidden" value = "{{item}}" name="Name"/></p>
-        <button value = "" type = "submit"></button>
+        <button class = "btn" value = "" type = "submit"> Delete Task </button>
     </form>
+</div>
     {% endfor %}
     
-</main>
+</header>
 
 <style>
 
@@ -125,6 +127,86 @@ html {
     background-color: #D3D3D3;
 }
 
+header {
+    background-color: #D3D3D3;
+    color: black;
+    min-height: 400px;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.item-actions {
+    background-color: #FAF9F6;
+    padding: 5vh;
+    margin: 2vh;
+    overflow: hidden;;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: orange 2px solid;
+}
+
+.item-creator {
+    background-color: #FAF9F6;
+    padding: 5vh;
+    margin: 2vh;
+    overflow: hidden;;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    justify-content: space-between;
+    border: orange 2px solid;
+}
+
+.counter {
+    color: orange;
+}
+
+
+.input-text {
+    background-color: #D3D3D3;
+    width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 3px solid orange;
+
+  outline: none;
+
+}
+
+.btn {
+    background-color: #D3D3D3;
+    border: none;
+    color: orange;
+    padding: 15px 30px;
+    text-decoration: none;
+    margin: 5px 2px;
+}
+
+.btn:hover {
+    background-color: orange;
+    border: none;
+    color: #D3D3D3;
+    padding: 15px 30px;
+    text-decoration: none;
+    margin: 5px 2px;
+}
+
+.task-item {
+    color: orange;
+    size: 16px;
+}
+
+.task-finish {
+    size: 10px;
+}
 
 
 </style>

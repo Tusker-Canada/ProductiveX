@@ -75,7 +75,7 @@ def calender():
   return render_template("calendar.html")
 
 @app.route('/courses')
-def calender():
+def courses():
   return render_template("courses.html")
 
 
