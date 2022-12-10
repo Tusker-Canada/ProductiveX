@@ -67,17 +67,16 @@ def finished():
     total = 0
     for value in counter:
       total += 1
-  \
     return redirect('/todo')
 
 
 @app.route('/calendar')
-def calendar():
-  return render_template('calendar.html')
+def calender():
+  return render_template("calendar.html")
 
 @app.route('/courses')
-def courses():
-  return render_template('courses.html')
+def calender():
+  return render_template("courses.html")
 
 
 
