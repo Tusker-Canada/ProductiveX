@@ -5,9 +5,17 @@
     <title>Website</title>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </head>
+
+{% if counter_val is none%}
 <body>
-    <h1>here is yo todo list!</h1>
+    <h1>Welcome! You have completed no tasks today!</h1>
 </body>
+
+{% else %}
+<body>
+    <h1>Welcome! You have completed {{counter_val}} tasks today!</h1>
+</body>
+{% endif %}
 
 <main>
     <form action="http://localhost:3000/todo", method = "POST">

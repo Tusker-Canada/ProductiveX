@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from storage import storage
+from storage import storage, counter
 import requests
 url = ('https://newsapi.org/v2/top-headlines?'
        'country=us&'
@@ -7,7 +7,7 @@ url = ('https://newsapi.org/v2/top-headlines?'
 response = requests.get(url)
 
 
-
+print(counter)
 
 app = Flask(__name__)
 
@@ -34,7 +34,10 @@ def todo():
     result = request.form.items()
     for i, y in result:
       storage.append(y)
-    return render_template('todo.html',items = storage)
+    total = 0
+    for value in counter:
+      total += 1
+    return render_template('todo.html',items = storage, counter_val = total)
 
 @app.route('/delete', methods = ['POST','GET'])
 def delete():
@@ -44,7 +47,10 @@ def delete():
     result = request.form.items()
     for i, y in result:
       storage.remove(y)
-    return render_template('todo.html',items = storage)
+      total = 0
+    for value in counter:
+      total += 1
+    return render_template('todo.html',items = storage, counter_val = total)
 
 @app.route('/finished', methods = ['POST','GET'])
 def finished():
@@ -54,7 +60,12 @@ def finished():
     result = request.form.items()
     for i, y in result:
       storage.remove(y)
-    return render_template('todo.html',items = list)
+    counter.append(1)
+    total = 0
+    for value in counter:
+      total += 1
+  
+    return render_template('todo.html',items = storage, counter_val = total)
 
 if __name__ == "__main__":
   app.run(port=3000)
