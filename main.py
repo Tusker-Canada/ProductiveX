@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from storage import storage, counter
 import requests
 url = ('https://newsapi.org/v2/top-headlines?'
@@ -29,7 +29,10 @@ def s():
 @app.route('/todo', methods = ['POST','GET'])
 def todo():
   if request.method == 'GET':
-    return render_template('todo.html',items = storage)
+    total = 0
+    for value in counter:
+      total += 1
+    return render_template('todo.html',items = storage, counter_val = total)
   if request.method == 'POST':
     result = request.form.items()
     for i, y in result:
@@ -42,7 +45,7 @@ def todo():
 @app.route('/delete', methods = ['POST','GET'])
 def delete():
   if request.method == 'GET':
-    return render_template('todo.html')
+    return redirect('/todo')
   if request.method == 'POST':
     result = request.form.items()
     for i, y in result:
@@ -50,12 +53,12 @@ def delete():
       total = 0
     for value in counter:
       total += 1
-    return render_template('todo.html',items = storage, counter_val = total)
+    return redirect('/todo')
 
 @app.route('/finished', methods = ['POST','GET'])
 def finished():
   if request.method == 'GET':
-    return render_template('todo.html')
+    return redirect('/todo')
   if request.method == 'POST':
     result = request.form.items()
     for i, y in result:
@@ -64,8 +67,8 @@ def finished():
     total = 0
     for value in counter:
       total += 1
-  
-    return render_template('todo.html',items = storage, counter_val = total)
+  \
+    return redirect('/todo')
 
 
 @app.route('/calandar')
