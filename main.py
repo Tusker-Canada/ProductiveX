@@ -67,5 +67,22 @@ def finished():
   
     return render_template('todo.html',items = storage, counter_val = total)
 
+
+@app.route('/calandar')
+def calandar():
+  return render_template('calandar.html')
+
+
+
+
+
+
+
+
+
+
+
+
+
 if __name__ == "__main__":
   app.run(port=3000)
