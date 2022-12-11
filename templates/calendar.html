@@ -26,6 +26,10 @@
                 <li><a class = "nav-item" href="/courses">COURSES</a></li>
             </ul>
         </div>
+    
+    <button id="toggler">Add New Event</button>
+    <div id="modal">
+    <form method="post" action = "http://localhost:3000/calendar">
     <label >Enter Event Name</label>
   <input type="input" id="event-input" required />
   <label >Enter Start Date</label>
@@ -33,10 +37,20 @@
   <label >Enter End date</label>
   <input type="date" id="end-input" required />
   <button id="submit">Submit</button>
+</form>
+</div>
+
+
 
   <div id="calendar"></div>
   <script>
 
+    $('#modal').hide()
+
+    $( "#toggler" ).click(function() {
+        $('#modal').toggle('modal')
+        
+      });
 
     var calendarEl = document.getElementById('calendar');
 
@@ -46,16 +60,7 @@
 
     calendar.render()
 
-    $('#submit').on('click', function () {
-      var startDay = $('#start-input').val()
-      var name = $('#event-input').val()
-      var endDay = $('#end-input').val()
-      calendar.addEvent({
-        title: name,
-        start: startDay,
-        end: endDay
-      })
-    });
+
   </script>
 </body>
 
