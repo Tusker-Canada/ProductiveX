@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect
-from storage import storage, counter, completed_tasks
+from storage import storage, counter, completed_tasks, events
+import datetime
 import requests
 url = ('https://newsapi.org/v2/top-headlines?'
        'country=us&'
@@ -42,8 +43,16 @@ def todo():
     return render_template('todo.html',items = storage, counter_val = total, finished_items = completed_tasks)
   if request.method == 'POST':
     result = request.form.items()
+    x = datetime.datetime.now()
     for i, y in result:
       storage.append(y)
+      event_data = {
+      'id': len(events) + 1 ,
+      'todo': y,
+      'start': x.strftime("%Y-%m-%d"),
+      'end': x.strftime("%Y-%m-%d")
+    }
+      events.append(event_data)
     total = 0
     for value in counter:
       total += 1
@@ -59,8 +68,16 @@ def delete():
   if request.method == 'POST':
     result = request.form.items()
     for i, y in result:
-      storage.remove(y)
-      total = 0
+      for value in events:
+        if value["todo"] == y:
+          storage.remove(y)
+          id = int(value["id"])
+          for i in range(len(events)):
+            if events[i]['id'] == id:
+              print(i)
+              del events[i]
+              break
+    total = 0
     for value in counter:
       total += 1
     return redirect('/todo')
@@ -71,9 +88,20 @@ def finished():
     return redirect('/todo')
   if request.method == 'POST':
     result = request.form.items()
+    
+
     for i, y in result:
-      storage.remove(y)
-      completed_tasks.append(y)
+      for value in events:
+        if value["todo"] == y:
+          storage.remove(y)
+          id = int(value["id"])
+          for i in range(len(events)):
+            if events[i]['id'] == id:
+              print(i)
+              del events[i]
+              completed_tasks.append(y)
+              break
+          
     counter.append(1)
     total = 0
     for value in counter:
@@ -84,8 +112,42 @@ def finished():
 
 @app.route('/calendar', methods = ['POST','GET'])
 def calender():
+  if request.method == 'GET':
+    return render_template("calendar.html", events = events)
+  if request.method == 'POST':
+    result = request.form
+    event = result['event']
+    start_date = result['start_date']
+    end_date = result['end_date']
+    event_data = {
+      'id': len(events) + 1 ,
+      'todo': event,
+      'start': start_date,
+      'end': end_date
+    }
+    events.append(event_data)
 
-    return render_template("calendar.html")
+    return render_template("calendar.html", events = events)
+
+@app.route('/event_delete', methods = ['POST','GET'])
+def event_delete():
+  if request.method == 'GET':
+    return redirect('/calendar')
+  if request.method == 'POST':
+    result = request.form
+    id = result["name"]
+    id = int(id)
+    print(events[0])
+    for i in range(len(events)):
+      if events[i]['id'] == id:
+        print(i)
+        del events[i]
+        break
+
+    print(events)
+    return redirect('/calendar')
+
+
 
 
 @app.route('/courses')

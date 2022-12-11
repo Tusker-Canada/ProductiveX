@@ -1,2 +1,5 @@
-x = []
-print (len(x))
+from datetime import datetime
+
+now = datetime.now()
+
+print(datetime.now())
