@@ -50,9 +50,9 @@
 <div class = "item-service">
     {% for item in items %}
     <div class = "item-actions">
-    <p class = "task-item"> Task: {{item}} </p> 
+    <p class = "task-item"> {{item}} </p> 
     <form action="http://localhost:3000/finished", method = "POST">
-        <p><input   type="checkbox" value = "{{item}}" name="Name" onChange="this.form.submit()"/> Finish Task</p>
+        <p class = "task-check-item"><input   type="checkbox" value = "{{item}}" name="Name" onChange="this.form.submit()"/> Finish Task</p>
         
     </form>
     <form action="http://localhost:3000/delete", method = "POST">
@@ -215,8 +215,7 @@ header {
 }
 
 .task-item {
-    color: orange;
-    size: 16px;
+    size: 25px;
 }
 
 .task-finish {
@@ -227,7 +226,8 @@ header {
     color: orange;
 }
 
-.finished-tasks {
+
+.task-check-item {
     color: orange;
 }
 </style>

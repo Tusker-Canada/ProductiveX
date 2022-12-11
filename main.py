@@ -33,6 +33,8 @@ def todo():
     total = 0
     for value in counter:
       total += 1
+    if len(completed_tasks) == 0:
+      return render_template('todo.html',items = storage, counter_val = total, finished_items = ["You have not completed any tasks."] )
     return render_template('todo.html',items = storage, counter_val = total, finished_items = completed_tasks)
   if request.method == 'POST':
     result = request.form.items()
