@@ -12,6 +12,10 @@ print(completed_tasks)
 
 app = Flask(__name__)
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return redirect('/home')
+
 @app.route('/home')
 def home():
   return render_template('index.html')
