@@ -28,16 +28,26 @@
 
 <header>
     
-
+<div class = "header-service">
     <div class = "item-creator" >
     <h1 class = "counter" >Welcome! You have completed {{counter_val}} tasks today!</h1>
     <form action="http://localhost:3000/todo", method = "POST">
         <p><input class = "input-text" placeholder="Type your task..." type="text" name="Name"/></p>
         <p><input class = "btn" type="submit" value ="submit"/></p>
     </form>
+    </div>
+    
+    <div>
+        <h2 class = "finished-tasks-title item-creator"> Here are the tasks you finished today.</h2>
+    <div class = "item-actions finished-tasks">
+    {% for finished_item in finished_items %}
+    <p>{{finished_item}}</p>
+    {% endfor %}
+</div>
+</div>
 </div>
 
-
+<div class = "item-service">
     {% for item in items %}
     <div class = "item-actions">
     <p class = "task-item"> Task: {{item}} </p> 
@@ -50,8 +60,10 @@
         <button class = "btn" value = "" type = "submit"> Delete Task </button>
     </form>
 </div>
-    {% endfor %}
-    
+{% endfor %}
+</div>
+
+
 </header>
 
 <style>
@@ -127,42 +139,45 @@ html {
     background-color: #D3D3D3;
 }
 
+
+
+
 header {
     background-color: #D3D3D3;
     color: black;
-    min-height: 400px;
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
     font-weight: bold;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    margin: 2rem;
+    grid-gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 0.3fr));
+    justify-content: center;
+
+
     
 }
+
+
 
 .item-actions {
     background-color: #FAF9F6;
     padding: 5vh;
     margin: 2vh;
-    overflow: hidden;;
+    border: orange 2px solid;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border: orange 2px solid;
 }
 
 .item-creator {
     background-color: #FAF9F6;
     padding: 5vh;
     margin: 2vh;
-    overflow: hidden;;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
     justify-content: space-between;
     border: orange 2px solid;
 }
+
+
 
 .counter {
     color: orange;
@@ -208,6 +223,12 @@ header {
     size: 10px;
 }
 
+.finished-tasks-title {
+    color: orange;
+}
 
+.finished-tasks {
+    color: orange;
+}
 </style>
 </html>

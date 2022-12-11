@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect
-from storage import storage, counter
+from storage import storage, counter, completed_tasks
 import requests
 url = ('https://newsapi.org/v2/top-headlines?'
        'country=us&'
@@ -8,6 +8,7 @@ response = requests.get(url)
 
 
 print(counter)
+print(completed_tasks)
 
 app = Flask(__name__)
 
@@ -32,7 +33,7 @@ def todo():
     total = 0
     for value in counter:
       total += 1
-    return render_template('todo.html',items = storage, counter_val = total)
+    return render_template('todo.html',items = storage, counter_val = total, finished_items = completed_tasks)
   if request.method == 'POST':
     result = request.form.items()
     for i, y in result:
@@ -40,7 +41,10 @@ def todo():
     total = 0
     for value in counter:
       total += 1
-    return render_template('todo.html',items = storage, counter_val = total)
+    print(storage)
+    if len(completed_tasks) == 0:
+      return render_template('todo.html',items = storage, counter_val = total, finished_items = ["You have not completed any tasks."] )
+    return render_template('todo.html',items = storage, counter_val = total, finished_items = completed_tasks )
 
 @app.route('/delete', methods = ['POST','GET'])
 def delete():
@@ -63,10 +67,12 @@ def finished():
     result = request.form.items()
     for i, y in result:
       storage.remove(y)
+      completed_tasks.append(y)
     counter.append(1)
     total = 0
     for value in counter:
       total += 1
+    
     return redirect('/todo')
 
 
