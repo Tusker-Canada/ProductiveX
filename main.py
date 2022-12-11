@@ -78,9 +78,11 @@ def finished():
     return redirect('/todo')
 
 
-@app.route('/calendar')
+@app.route('/calendar', methods = ['POST','GET'])
 def calender():
-  return render_template("calendar.html")
+
+    return render_template("calendar.html")
+
 
 @app.route('/courses')
 def courses():
