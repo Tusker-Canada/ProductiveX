@@ -43,7 +43,7 @@
         
                     <div>
                         
-                        <input type="checkbox" value="medicine" name="name1" >
+                        <input type="checkbox" value="doctor_mike" name="name1" >
                         <label for="medicine">Medicine</label>
                     </div>
         
@@ -95,15 +95,22 @@
             </form>
         </header>
     </div>
+    <main>
     {% for video in videos %}
+    <div class = "card">
+        <div class="card-body">
+            <img class = "card-img" src="http://img.youtube.com/vi/{{video}}/0.jpg" alt="img">
+            <h2 class = "card-title"> <a class = "card-title-link" target = "_blank" href="https://www.youtube.com/watch?v={{video}}"> External Link: YouTube </a></h2>
+            <p class = "card-description"> A video on  your chosen topic. </p>
 
-    <div class="videos">
-        <a href="{{video}}">YouTube</a>
+        </div>
+        
     </div>
-
+    {% endfor %}
+    </main>
      
 
-    {% endfor %}
+    
    
 
 </div>
@@ -215,7 +222,6 @@ $( "#choose" ).click(function() {
     }
 
     .video-dropdown {
-        display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
@@ -308,7 +314,45 @@ $( "#choose" ).click(function() {
         color: black;
     }
     
-    
+    main {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    display: grid;
+    margin: 2rem;
+    grid-gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 0.3fr));
+    justify-content: center;
+    background-color:#D3D3D3 ;
+}
+
+.card { 
+    background-color: #FAF9F6;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-img {
+    height: 15rem;
+    width: 100%;
+    object-fit: cover;
+
+}
+
+.card-title {
+    padding: 2rem;
+}
+
+.card-description {
+    padding: 2rem;
+}
+
+.card-title-link {
+    text-decoration: none;
+    color: orange;
+    font-weight: bold;
+}
+
     
     
     </style>

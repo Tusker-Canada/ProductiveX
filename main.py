@@ -28,10 +28,6 @@ def news():
   articles = response.json()["articles"]
   return render_template('news.html',articles= articles)
 
-@app.route('/s')
-def s():
-  articles = response.json()["articles"]
-  return render_template('sadasd.html')
 
 
 @app.route('/todo', methods = ['POST','GET'])
@@ -166,6 +162,7 @@ def courses():
       
       html = urllib.request.urlopen("https://www.youtube.com/results?search_query=" + 
   result1)
+
       video_ids = re.findall(r"watch\?v=(\S{11})", html.read().decode())
 
       video_ids = sorted(set(video_ids))
@@ -174,8 +171,8 @@ def courses():
       i = 0
       for id in video_ids:
           i+=1
-          if i < 6:
-              x ="https://www.youtube.com/watch?v=" + id
+          if i < 5:
+              x =id
               videos.append(x)
           else:
               break
