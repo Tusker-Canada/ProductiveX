@@ -7,10 +7,6 @@ url = ('https://newsapi.org/v2/top-headlines?'
        'apiKey=fd4106558c6a414c9701aef360fc932f')
 response = requests.get(url)
 
-
-print(counter)
-print(completed_tasks)
-
 app = Flask(__name__)
 
 @app.errorhandler(404)
