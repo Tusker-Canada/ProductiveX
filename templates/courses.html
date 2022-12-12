@@ -22,17 +22,91 @@
 
     </nav>
 
-    <form action="http://localhost:3000/course_delete" method="post">
-        <button type="submit" value="submit">Delete</button>
-    </form>
 
 
+<div class="video-dropdown">
+    {%if listLen == 0 %}
+    <button class="btn2" id = "choose">Add your Choices </button>
+    {%endif%}
+    {%if listLen > 0 %}
+    <button class="btn2" id = "choose">Modify your Choices </button>
+    {%endif%}
+    <div id="modal" class = "modal">
+        <header id = "header">
+            <form action="http://localhost:3000/courses" method ="post">
+                <label for="courses" id="title">Choose some Interests </label>
+                    <div>
+                      
+                        <input type="checkbox" value="programming" name="name" >
+                        <label for="name">Information Technologies</label>
+                    </div>
+        
+                    <div>
+                        
+                        <input type="checkbox" value="medicine" name="name1" >
+                        <label for="medicine">Medicine</label>
+                    </div>
+        
+        
+                    <div>
+                        <input type="checkbox" value="buisness" name="name2">
+                        <label for="buisness">Buisness</label>
+
+                    </div>
+        
+        
+                    <div>
+                        <input type="checkbox" value="economics" name="name3">
+                        <label for="economics">Economics</label>
+
+                    </div>
+        
+        
+                    <div>
+                        <input type="checkbox" value="commerce" name="name4">
+                        <label for="commerce">Trade and Commerce</label>
+                    </div>
+        
+        
+                    <div>
+                        <input type="checkbox" value="law" name="name5">
+                        <label for="law">Law</label>
+
+                    </div>
+        
+        
+                    <div>
+                        <input type="checkbox" value="chemistry" name="name6">
+                        <label for="chemistry">Chemistry</label>
+
+                    </div>
+        
+        
+                    <div>
+                        <input  type="checkbox"value="physics" name="name7">
+                        <label for="physics">Physics</label>
+                    </div>
+                    
+                <input type="submit" value="Submit" class="btn">
+            </form>
+        
+            <form action="http://localhost:3000/course_delete" method="post">
+                <button type="submit" value="submit" class = "btn">Delete all Courses</button>
+            </form>
+        </header>
+    </div>
     {% for video in videos %}
 
-        <p>{{video}}</p>
+    <div class="videos">
+        <a href="{{video}}">YouTube</a>
+    </div>
+
      
 
     {% endfor %}
+   
+
+</div>
 
 
 
@@ -40,65 +114,17 @@
 
 </body>
 
-<button id="choose">Modify your Choices </button>
-
-<header id = "header">
-    <form action="http://localhost:3000/courses" method ="post">
-        <label for="courses">Choose some Intrests</label>
-            <div>
-                <p>IT</p>
-                <input type="checkbox" value="computer-science" name="name" >
-            </div>
-
-            <div>
-                <p>Medicine</p>
-                <input type="checkbox" value="medicine" name="name1" >
-            </div>
 
 
-            <div>
-                <p>Buisness</p>
-                <input type="checkbox" value="buisness" name="name2">
-            </div>
 
 
-            <div>
-                <p>Economics</p>
-                <input type="checkbox" value="economics" name="name3">
-            </div>
 
 
-            <div>
-                <p>Trade and Commerce</p>
-                <input type="checkbox" value="trade-commerce" name="name4">
-            </div>
-
-
-            <div>
-                <p>Law</p>
-                <input type="checkbox" value="law" name="name5">
-            </div>
-
-
-            <div>
-                <p>Chemistry</p>
-                <input type="checkbox" value="chemistry" name="name6">
-            </div>
-
-
-            <div>
-                <p>Physics</p>
-                <input  type="checkbox"value="physics" name="name7">
-            </div>
-            
-        <input type="submit" value="submit">
-    </form>
-</header>
 <script>
-    $('#header').hide()
+    $('.modal').hide()
 
 $( "#choose" ).click(function() {
-    $('#header').toggle('modal')
+    $('.modal').toggle('modal')
     
   });
 </script>
@@ -174,6 +200,114 @@ $( "#choose" ).click(function() {
     html {
         background-color: #D3D3D3;
     }
+
+    .videos {
+        background-color: #FAF9F6;
+        padding: 5vh;
+        margin: 2vh;
+        width: 50%;
+        border: orange 2px solid;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .video-dropdown {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    header form  {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: baseline;
+    }
+
+    header form  > :first-child {
+        margin-right: auto;    /* Push following flex items to the right */
+      }
+
+    .modal {
+        color: black;
+        text-decoration: none;
+    
+    
+    
+        background-color:  #FAF9F6;
+        padding: 15px 30px;
+        text-decoration: none;
+        margin: 5px 2px;
+        width: 50%;
+      border: 2px solid orange;
+    
+      outline: none;
+    }
+
+    .btn {
+        background-color: orange;
+        border: none;
+        color: #FAF9F6;
+        border: 2px solid #D3D3D3;
+        padding: 15px 30px;
+        text-decoration: none;
+        margin: 5px 2px;
+    }
+    
+    .btn:hover {
+        background-color: #D3D3D3;
+        border: none;
+        color:orange ;
+        border: 2px solid orange;
+        padding: 15px 30px;
+        text-decoration: none;
+        margin: 5px 2px;
+    }
+
+
+    .btn2 {
+        background-color: orange ;
+        border: none;
+        color: #FAF9F6;
+        border: 2px solid #FAF9F6;
+        padding: 15px 30px;
+        text-decoration: none;
+        margin: 5px 2px;
+    }
+    
+    .btn2:hover {
+        background-color: #FAF9F6;
+        border: none;
+        color:orange ;
+        border: 2px solid orange;
+        padding: 15px 30px;
+        text-decoration: none;
+        margin: 5px 2px;
+    }
+
+
+
+    header form label {
+        color: orange  ;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    header form #title{
+        color: orange;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .videos a {
+        text-decoration: none;
+        color: black;
+    }
+    
     
     
     

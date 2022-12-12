@@ -160,7 +160,7 @@ def event_delete():
 def courses():
 
   if request.method == "GET":
-    return render_template("courses.html", videos = videos)
+    return render_template("courses.html", videos = videos, listLen = len(videos))
   if request.method == "POST":
     videos.clear()
     result = request.form
@@ -185,7 +185,7 @@ def courses():
               break
 
     
-    return render_template("courses.html", videos = videos)
+    return render_template("courses.html", videos = videos, listLen = len(videos))
 
 
 @app.route('/course_delete', methods = ['POST','GET'] )
