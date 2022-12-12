@@ -1,7 +1,13 @@
 from flask import Flask, render_template, request, redirect
-from storage import storage, counter, completed_tasks, events
+from storage import storage, counter, completed_tasks, events, videos
 import datetime
 import requests
+import re
+import urllib
+
+
+
+
 url = ('https://newsapi.org/v2/top-headlines?'
        'country=us&'
        'apiKey=fd4106558c6a414c9701aef360fc932f')
@@ -150,9 +156,47 @@ def event_delete():
 
 
 
-@app.route('/courses')
+@app.route('/courses', methods = ['POST','GET'])
 def courses():
-  return render_template("courses.html")
+
+  if request.method == "GET":
+    return render_template("courses.html", videos = videos)
+  if request.method == "POST":
+    videos.clear()
+    result = request.form
+    for i in result:
+
+      result1 = result[i]
+      
+      html = urllib.request.urlopen("https://www.youtube.com/results?search_query=" + 
+  result1)
+      video_ids = re.findall(r"watch\?v=(\S{11})", html.read().decode())
+
+      video_ids = sorted(set(video_ids))
+
+      
+      i = 0
+      for id in video_ids:
+          i+=1
+          if i < 6:
+              x ="https://www.youtube.com/watch?v=" + id
+              videos.append(x)
+          else:
+              break
+
+    
+    return render_template("courses.html", videos = videos)
+
+
+@app.route('/course_delete', methods = ['POST','GET'] )
+def course_delete():
+  if request.method == 'GET':
+    return redirect('/courses')
+  if request.method == "POST":
+    videos.clear()
+    return redirect('/courses')
+  
+
 
 
 
