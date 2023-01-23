@@ -25,7 +25,9 @@
                 <li><a class="nav-item-active" href="/calendar">CALENDAR</a></li>
                 <li><a class="nav-item" href="/courses">COURSES</a></li>
             </ul>
-        </div>    
+        </div>
+        
+        
 </body>
 <header>
         <div>
@@ -43,6 +45,8 @@
         
         <p>Current Events will appear below.</p>
         {% for event in events %}
+
+
         <div class = "item-actions">
         <form action="http://localhost:3000/event_delete", method = "POST">
             <p class = "event-item"> {{event.todo}} </p> 
@@ -69,8 +73,7 @@ $( "#toggler" ).click(function() {
 
             var calendarEl = document.getElementById('calendar');
 
-
-
+      
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 events : [
                     {% for event in events %}

@@ -6,7 +6,7 @@ import re
 import urllib
 
 
-
+"Copyright © 2023, Tusker Industries, All Rights Reserved"
 
 url = ('https://newsapi.org/v2/top-headlines?'
        'country=us&'
